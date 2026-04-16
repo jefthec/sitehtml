@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /secreto/
-
-Sitemap: https://jefthec.github.io/sitehtml/sitemap.xml
