@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Universo NFL – história, regras, franquias e recordes da National Football League." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Critério 10: Search Console verification -->
+  <meta name="google-site-verification" content="COLE_SEU_TOKEN_AQUI" />
+
+  <title>Universo NFL - Início</title>
+
+  <!-- Critério 9: Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <style>
+    /* ============================================================
+       Critério 03: CSS com variáveis (--cor, --fonte)
+       ============================================================ */
+    :root {
+      --cor-primaria: #013369;      /* NFL deep navy */
+      --cor-secundaria: #D50A0A;    /* NFL red */
+      --cor-destaque: #FFB612;      /* NFL gold */
+      --cor-fundo: #0d1117;
+      --cor-fundo-card: #161b22;
+      --cor-texto: #e6edf3;
+      --cor-texto-suave: #8b949e;
+      --cor-borda: #30363d;
+      --fonte-titulo: 'Georgia', serif;
+      --fonte-corpo: 'Segoe UI', system-ui, sans-serif;
+      --raio: 8px;
+      --transicao: 0.3s ease;
+    }
+
+    /* ============================================================
+       Reset e base
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--fonte-corpo);
+      background-color: var(--cor-fundo);
+      color: var(--cor-texto);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--cor-destaque); text-decoration: none; transition: color var(--transicao); }
+    a:hover, a:focus { color: #fff; text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--cor-destaque); outline-offset: 3px; }
+
+    /* ============================================================
+       Critério 01: HTML semântico – <header>
+       ============================================================ */
+    header {
+      background: linear-gradient(135deg, var(--cor-primaria) 0%, #011f4b 100%);
+      border-bottom: 3px solid var(--cor-secundaria);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.6);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      display: flex;              /* Critério 02: Flexbox */
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo img {
+      height: 44px;
+      width: auto;
+      border-radius: 4px;
+    }
+
+    .logo-texto {
+      font-family: var(--fonte-titulo);
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-texto span {
+      color: var(--cor-destaque);
+    }
+
+    /* ============================================================
+       Critério 01: HTML semântico – <nav>
+       Critério 05: Menu com JavaScript
+       Critério 06: Menu hamburger responsivo
+       ============================================================ */
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-lista {
+      list-style: none;
+      display: flex;             /* Critério 02: Flexbox */
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .nav-lista a {
+      display: block;
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--raio);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #cdd9e5;
+      transition: background var(--transicao), color var(--transicao);
+    }
+
+    .nav-lista a:hover,
+    .nav-lista a:focus {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Critério 06: Botão hamburger (☰) */
+    #btn-hamburger {
+      display: none;
+      background: none;
+      border: 1.5px solid var(--cor-destaque);
+      border-radius: 6px;
+      color: var(--cor-destaque);
+      font-size: 1.4rem;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      transition: background var(--transicao);
+      line-height: 1;
+    }
+
+    #btn-hamburger:hover,
+    #btn-hamburger[aria-expanded="true"] {
+      background: var(--cor-destaque);
+      color: var(--cor-primaria);
+    }
+
+    /* ============================================================
+       Critério 02: CSS responsivo com Flexbox — breakpoints
+       ============================================================ */
+    @media (max-width: 768px) {
+      #btn-hamburger {
+        display: block;         /* Critério 06: ☰ visível no mobile */
+      }
+
+      nav {
+        position: relative;
+      }
+
+      .nav-lista {
+        display: none;          /* Critério 06: links somem por padrão no mobile */
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 0;
+        background: var(--cor-primaria);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--raio);
+        flex-direction: column;
+        min-width: 220px;
+        padding: 0.5rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      }
+
+      /* Critério 05 + 06: JS adiciona .aberto → links aparecem */
+      .nav-lista.aberto {
+        display: flex;
+      }
+
+      .nav-lista a {
+        padding: 0.65rem 1rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ============================================================
+       Critério 04: Animação CSS3 com @keyframes
+       ============================================================ */
+    @keyframes fadeSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse-borda {
+      0%, 100% { border-color: var(--cor-secundaria); }
+      50%       { border-color: var(--cor-destaque); }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+
+    /* ============================================================
+       Critério 01: HTML semântico – <main>
+       ============================================================ */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 2.5rem;
+      animation: fadeSlideDown 0.7s ease both;  /* Critério 04 */
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cor-destaque);
+      border: 1px solid var(--cor-destaque);
+      border-radius: 40px;
+      padding: 0.25rem 0.85rem;
+      margin-bottom: 1.2rem;
+      animation: pulse-borda 3s infinite;       /* Critério 04 */
+    }
+
+    .hero h1 {
+      font-family: var(--fonte-titulo);
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      /* Critério 04: shimmer no título */
+      background: linear-gradient(
+        90deg,
+        var(--cor-texto) 0%,
+        var(--cor-destaque) 50%,
+        var(--cor-texto) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 0 auto 2rem;
+      font-size: 1.05rem;
+      color: var(--cor-texto-suave);
+    }
+
+    /* Divisor */
+    .divisor {
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--cor-secundaria), var(--cor-destaque), transparent);
+      margin: 2rem 0;
+      border: none;
+    }
+
+    /* Grid de links – Critério 02: Flexbox */
+    .secao-titulo {
+      font-family: var(--fonte-titulo);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--cor-texto);
+      margin-bottom: 1.25rem;
+      padding-left: 0.75rem;
+      border-left: 4px solid var(--cor-secundaria);
+    }
+
+    .grid-links {
+      display: flex;             /* Critério 02: Flexbox */
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card-link {
+      flex: 1 1 200px;
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--cor-texto);
+      font-weight: 500;
+      /* Critério 04: transition */
+      transition: transform var(--transicao), border-color var(--transicao), box-shadow var(--transicao);
+      text-decoration: none;
+    }
+
+    .card-link:hover,
+    .card-link:focus {
+      transform: translateY(-3px);
+      border-color: var(--cor-destaque);
+      box-shadow: 0 6px 20px rgba(213,10,10,0.25);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .card-link .icone {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Sobre section */
+    .sobre {
+      background: var(--cor-fundo-card);
+      border: 1px solid var(--cor-borda);
+      border-radius: var(--raio);
+      padding: 1.75rem 1.5rem;
+      margin-top: 2.5rem;
+      /* Critério 04: transition ao hover */
+      transition: border-color var(--transicao);
+    }
+
+    .sobre:hover { border-color: var(--cor-secundaria); }
+
+    .sobre p { color: var(--cor-texto-suave); margin-bottom: 0.5rem; }
+    .sobre p:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       Critério 01: HTML semântico – <footer>
+       ============================================================ */
+    footer {
+      background: #0a0e13;
+      border-top: 1px solid var(--cor-borda);
+      padding: 1.5rem 1.25rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;             /* Critério 02: Flexbox */
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .footer-inner p {
+      font-size: 0.82rem;
+      color: var(--cor-texto-suave);
+    }
+
+    .footer-inner a {
+      color: var(--cor-destaque);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 600px) {
+      .footer-inner { flex-direction: column; text-align: center; }
+      .grid-links { flex-direction: column; }
+      .card-link { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Critério 01: <header> semântico -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="https://jefthec.github.io/sitehtml/imagens/uniube.jpg" alt="Logotipo da Uniube" />
+        <span class="logo-texto">Universo <span>NFL</span></span>
+      </div>
+
+      <!-- Critério 01: <nav> semântico | Critério 06: botão hamburger -->
+      <nav aria-label="Menu principal">
+        <button
+          id="btn-hamburger"
+          aria-controls="nav-lista"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+          onclick="toggleMenu()"
+        >☰</button>
+
+        <!-- Critério 06: <ul> com id para o JS controlar -->
+        <ul class="nav-lista" id="nav-lista" role="list">
+          <li><a href="https://jefthec.github.io/sitehtml/historia.html">História</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/franquias.html">Franquias</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/divisoes.html">Divisões</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/regras.html">Regras</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/mvp.html">MVP</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/dpoy.html">DPOY</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/fotos.html">Fotos</a></li>
+          <li><a href="https://jefthec.github.io/sitehtml/contatos.html">Contatos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Critério 01: <main> semântico -->
+  <main>
+    <section class="hero" aria-labelledby="titulo-principal">
+      <p class="hero-badge">⭐ Projeto Acadêmico · Tecnologias para Internet</p>
+      <h1 id="titulo-principal">Tudo sobre a NFL</h1>
+      <p>Explore a história, as regras e os recordes da National Football League — o maior espetáculo do esporte americano.</p>
+    </section>
+
+    <hr class="divisor" />
+
+    <section aria-labelledby="titulo-secoes">
+      <h2 class="secao-titulo" id="titulo-secoes">Explore o conteúdo</h2>
+      <div class="grid-links">
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/historia.html">
+          <span class="icone">📖</span>
+          <span>História da Liga</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/franquias.html">
+          <span class="icone">🏟️</span>
+          <span>Todas as Franquias</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/divisoes.html">
+          <span class="icone">🗂️</span>
+          <span>Divisões e Conferências</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/regras.html">
+          <span class="icone">📋</span>
+          <span>Regras do Jogo</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/mvp.html">
+          <span class="icone">🏆</span>
+          <span>Vencedores MVP</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/dpoy.html">
+          <span class="icone">🛡️</span>
+          <span>Vencedores DPOY</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/fotos.html">
+          <span class="icone">🖼️</span>
+          <span>Galeria de Imagens</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/links.html">
+          <span class="icone">🔗</span>
+          <span>Links Externos</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/contatos.html">
+          <span class="icone">✉️</span>
+          <span>Contatos</span>
+        </a>
+        <a class="card-link" href="https://jefthec.github.io/sitehtml/inspiracao.html">
+          <span class="icone">💡</span>
+          <span>Inspirações</span>
+        </a>
+      </div>
+    </section>
+
+    <article class="sobre" aria-label="Sobre o projeto">
+      <h2 class="secao-titulo" style="margin-bottom:0.75rem;">Sobre este projeto</h2>
+      <p>Este site é um projeto acadêmico desenvolvido para a disciplina <strong>Tecnologias para Internet</strong>.</p>
+      <p>O objetivo é apresentar de forma organizada a história, as regras e os principais recordes da NFL, utilizando HTML semântico, CSS moderno e JavaScript para interatividade.</p>
+    </article>
+  </main>
+
+  <!-- Critério 01: <footer> semântico -->
+  <footer>
+    <div class="footer-inner">
+      <p>Projeto acadêmico · <strong>Jeferson Vicente Ferreira da Silva</strong> · RA: 5165130</p>
+      <p>Disciplina: Tecnologias para Internet</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       Critério 05: Menu abre e fecha via JavaScript (sem erros)
+       Critério 06: Menu hamburger — links aparecem/somem ao clicar
+       ============================================================ -->
+  <script>
+    function toggleMenu() {
+      var lista = document.getElementById('nav-lista');
+      var btn   = document.getElementById('btn-hamburger');
+      var aberto = lista.classList.toggle('aberto');
+      btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      btn.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    }
+
+    // Fecha o menu ao clicar em um link (mobile UX)
+    document.querySelectorAll('#nav-lista a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var lista = document.getElementById('nav-lista');
+        var btn   = document.getElementById('btn-hamburger');
+        lista.classList.remove('aberto');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Abrir menu');
+      });
+    });
+
+    // Fecha o menu ao clicar fora dele
+    document.addEventListener('click', function(e) {
+      var nav  = document.querySelector('nav');
+      var lista = document.getElementById('nav-lista');
+      var btn   = document.getElementById('btn-hamburger');
+      if (!nav.contains(e.target) && lista.classList.contains('aberto')) {
+        lista.classList.remove('aberto');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Abrir menu');
+      }
+    });
+  </script>
+
+</body>
+</html>
